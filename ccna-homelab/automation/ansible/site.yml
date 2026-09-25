@@ -1,0 +1,31 @@
+---
+- name: Manage and verify SW1
+  hosts: sw1
+  gather_facts: false
+  tasks:
+    - name: Read version
+      cisco.ios.ios_command:
+        commands: show version
+      register: ver
+
+    - name: Show first line of version output
+      ansible.builtin.debug:
+        msg: "{{ ver.stdout_lines[0][0] }}"
+
+    - name: Ensure VLAN 40 exists
+      cisco.ios.ios_config:
+        parents: vlan 40
+        lines:
+          - name IOT
+
+    - name: Ensure VLAN 50 exists
+      cisco.ios.ios_config:
+        parents: vlan 50
+        lines:
+          - name PRINTERS
+
+    - name: Back up the running config
+      cisco.ios.ios_config:
+        backup: true
+        backup_options:
+          dir_path: ./backups

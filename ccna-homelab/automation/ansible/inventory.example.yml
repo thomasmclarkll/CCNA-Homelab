@@ -1,0 +1,16 @@
+all:
+  hosts:
+    sw1:
+      ansible_host: 10.10.99.2   # replace with your switch's mgmt IP
+  vars:
+    ansible_network_os: cisco.ios.ios
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_user: admin
+    ansible_password: "{{ lookup('env', 'SW_PASS') }}"
+    ansible_become: true
+    ansible_become_method: enable
+    ansible_become_password: "{{ lookup('env', 'SW_ENABLE') }}"
+
+# Copy this file to inventory.yml (gitignored) and adjust ansible_host.
+# Never put real passwords in this file — use the environment variables
+# SW_PASS and SW_ENABLE instead.
