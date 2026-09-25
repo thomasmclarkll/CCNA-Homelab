@@ -1,64 +1,64 @@
-# CCNA Homelab: Segmented Network with Routing, Security, and Automation
+# Week 1: Network Fundamentals
 
-A six-week, hands-on CCNA 200-301 study project built on real hardware: a Cisco
-Catalyst WS-C3560CX-12TC-S, a pfSense firewall VM, and a UniFi router, with
-Packet Tracer used for multi-device scenarios the single switch can't cover
-(STP root elections, EtherChannel, wireless, Cisco NAT, HSRP).
+**Exam domain:** Network Fundamentals (20% of CCNA 200-301)
+**Ran on:** Real switch (interfaces, MAC learning, addressing); Packet Tracer for switching simulation and wireless basics
 
-**Status:** in progress, started September 2026, targeting the CCNA exam before
-Thanksgiving 2026. `docs/study-log.md` tracks weekly progress; each week below
-links to its own writeup.
+## Goal
+
+What this week's lab set out to prove I could do, in a sentence or two.
+
+## Topology
+
+Link to or reproduce the relevant slice of `docs/topology.md`. Note any
+week-specific additions (new VLANs, new interfaces, temporary cabling).
 
 ## What I built
 
-- VLAN segmentation with 802.1Q trunking from a Catalyst switch into a
-  virtualized firewall
-- Inter-VLAN routing (router-on-a-stick and switch SVIs), OSPFv2 peering with
-  pfSense, and floating static routes for failover to a second ISP path
-- DHCP (server and relay), NTP, syslog, SNMPv3, and SSH-only management
-- Extended ACLs, port security, DHCP snooping, and Dynamic ARP Inspection,
-  including a live rogue-DHCP-server test
-- Ansible playbooks that verify switch state and back up configuration over SSH
+Walk through what was configured, in your own words, not a command dump.
+Link to the sanitized configs in `configs/` and the saved output in
+`verification/` rather than pasting everything inline.
 
-## Repo layout
+- Step 1:
+- Step 2:
+- Step 3:
+
+## Verification
+
+Key `show` commands and what they proved. Full output lives in
+`verification/`; pull the important lines here.
 
 ```
-docs/             topology, IP/VLAN plan, weekly study log, lessons learned
-labs/weekN-*/     one folder per exam domain: README, sanitized configs,
-                  saved verification output, and any Packet Tracer files
-capstone/         the week 6 branch-office build tying all domains together
-automation/       Ansible playbooks and Terraform examples
-scripts/          sanitize.sh strips secrets/real IPs before anything is committed
+<paste the interesting excerpt, sanitized>
 ```
 
-## Skills demonstrated, and where to look
+## Faults I injected and diagnosed
 
-| Area | Where |
-|---|---|
-| VLANs, trunking, STP | [labs/week2-network-access](labs/week2-network-access) |
-| Routing, OSPF troubleshooting | [labs/week3-ip-connectivity](labs/week3-ip-connectivity) |
-| Network services (DHCP/NTP/syslog/SNMP) | [labs/week4-ip-services](labs/week4-ip-services) |
-| Security hardening, ACLs, DHCP snooping/DAI | [labs/week5-security](labs/week5-security) |
-| Automation (Ansible/Terraform, REST, JSON) | [automation](automation) |
-| Full build tying it together | [capstone](capstone) |
+This is the most valuable section for anyone reading this repo. For each
+fault: what you broke, what the symptom looked like, which commands proved
+the cause, and the fix.
 
-## Real hardware vs. Packet Tracer
+### Fault 1: {short description}
 
-Most of this ran on real gear: the 3560-CX, pfSense, and UniFi. A single
-switch can't demonstrate everything the exam covers (a second switch for real
-STP elections and EtherChannel, a WLC and APs for wireless, HSRP, Cisco-style
-NAT). Every lab README says explicitly which parts were physical and which
-were done in Cisco Packet Tracer, and why.
+- **Symptom:**
+- **Diagnosis commands:**
+- **Root cause:**
+- **Fix:**
 
-## Lab topology
+### Fault 2: {short description}
 
-See [docs/topology.md](docs/topology.md) for the full diagram and IP/VLAN
-plan. All addressing here uses private ranges or RFC 5737/3849 documentation
-prefixes; nothing reflects real public IPs.
+- **Symptom:**
+- **Diagnosis commands:**
+- **Root cause:**
+- **Fix:**
 
-## About this project
+## What I'd do differently
 
-I built this as a structured way to prepare for the CCNA while documenting
-the process the way I'd want to show it to a hiring manager: real configs,
-real `show` output, real faults I injected and diagnosed, not just a
-certificate. Feedback welcome via issues.
+Anything you'd change about the design, or a concept you had to re-read
+before it clicked.
+
+## Files in this folder
+
+- `configs/` — sanitized final configuration
+- `verification/` — saved `show` command output
+- `packet-tracer/` — `.pkt` file(s) for anything this week that needed more
+  than one switch/router, a WLC, or Cisco-native NAT (if applicable)
